@@ -1,0 +1,36 @@
+# Este flujo de trabajo construirá y probará un proyecto Golang
+# Para más información: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Configura la versión de Go especificada en go.mod, que es Go 1.19
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    # Descarga las dependencias del módulo (esto también valida tu go.mod y go.sum)
+    - name: Install dependencies
+      run: go mod download
+
+    # Construye tu proyecto; el comando 'go build' compila los paquetes y dependencias
+    - name: Build
+      run: go build -v ./...
+
+    # Ejecuta las pruebas unitarias
+    # - name: Test
+    #   run: go test -v ./...
+
