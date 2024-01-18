@@ -10,7 +10,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-const AppName = "EDcommerce"
+const AppName = "EcommerceGoSample"
 
 func newDBConnection() (*pgxpool.Pool, error) {
 	min := 3
